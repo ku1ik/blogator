@@ -1,0 +1,1 @@
+Dir["content/blog/**/*.txt"].reject { |fn| fn =~ /index.txt$/ }.map { |fn| p = Webby::Resources::Page.new(fn); Post.create(:title => p.title, :slug => fn[/\/([^\/]+)\.txt$/, 1], :body_source => p._read, :created_at => p.created_at) }

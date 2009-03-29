@@ -1,0 +1,7 @@
+<%= partial :post, :locals => { :post => @posts.first, :comments => false } %>
+
+<h2 class="previously">Previously on sickill.net:</h2>
+
+<% @posts.to_a[1..-1].each do |post| %>
+  <%= partial :post_preview, :locals => { :post => post } %>
+<% end %>

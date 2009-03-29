@@ -1,0 +1,9 @@
+<h2>Posts index</h2>
+
+<%= link_to("New post", "/posts/new") %>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li><%= post.title %> (<%= post.created_at.strftime("%Y/%m/%d") %>) <%= link_to("Edit", "/posts/#{post.id}/edit") %></li>
+  <% end %>
+</ul>

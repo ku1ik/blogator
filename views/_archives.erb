@@ -1,0 +1,3 @@
+<% @archives.keys.sort_by { |d| d.strftime("%Y%m") }.reverse.each do |date| %>
+  <p><%= link_to date.strftime("%B %Y"), "/blog/#{date.strftime('%Y/%m')}" %> <span class="tag_popularity">(<%= @archives[date] %>)</span></p>
+<% end %>
