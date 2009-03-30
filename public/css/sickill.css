@@ -120,8 +120,8 @@ h1 {
   font-size: 11px;
 }
 
-#content strong {
-  font-weight: 800;
+strong {
+  font-weight: bold;
 }
 
 /*
@@ -311,4 +311,17 @@ div.admin form {
 span.tag_popularity {
   font-size: 10px;
   color: #777;
+}
+
+.content_box ul {
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  padding-left: 0;
+}
+
+.content_box li {
+  padding-left:12px;
+  line-height:1.5em;
+  background:transparent url(/images/f-li.gif) no-repeat scroll 0 0;
 }
