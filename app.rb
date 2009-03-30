@@ -80,4 +80,4 @@ class BlogApp < Sinatra::Base
   end
 end
 
-BlogApp.run! if __FILE__ == $0
+#BlogApp.run! if __FILE__ == $0
