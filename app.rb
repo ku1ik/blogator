@@ -3,11 +3,14 @@ require 'sinatra'
 require 'sinatras-hat'
 
 class BlogApp < Sinatra::Base
-  set :app_file, __FILE__
-  set :logging, true
-  set :static, true
-  set :root, APP_ROOT
-  set :dump_errors, true
+#  configure do
+    set :run, false
+    set :app_file, __FILE__
+    set :logging, true
+    set :static, true
+    set :root, APP_ROOT
+    set :dump_errors, true
+#  end
 
   helpers do
     include Sickill::Helpers
@@ -80,4 +83,4 @@ class BlogApp < Sinatra::Base
   end
 end
 
-#BlogApp.run! if __FILE__ == $0
+#BlogApp.run!(:port => 6100, :server => "thin", :environment => :production) if __FILE__ == $0
