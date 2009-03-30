@@ -8,7 +8,7 @@ require 'redcloth'
 
 APP_ROOT = File.dirname(__FILE__)
 
-DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/db.sqlite3")
+DataMapper.setup(:default, "sqlite3://#{File.expand_path(File.join(File.dirname(__FILE__), 'db.sqlite3'))}")
 #DataObjects::Sqlite3.logger = DataObjects::Logger.new(STDOUT, 0)
 
 require File.join(File.dirname(__FILE__), 'lib', 'extensions.rb')
