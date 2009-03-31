@@ -10,7 +10,7 @@ xml.feed :'xml:lang' => 'en-US', :xmlns => 'http://www.w3.org/2005/Atom' do
     xml.entry do |entry|
       entry.id "http://sickill.net#{post.url}"
       entry.link :type => 'text/html', :href => "http://sickill.net#{post.url}", :rel => 'alternate'
-      entry.updated post.created_at.xmlschema
+      entry.updated rfc_date(post.created_at)
       entry.title post.title
 #      entry.summary post.perex, :type => 'html'
       entry.content post.body, :type => 'html'
