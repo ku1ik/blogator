@@ -41,18 +41,19 @@ class BlogApp < Sinatra::Base
     @archives = Post.all.to_a.group_by { |p| Date.new(p.created_at.year, p.created_at.month) }.map { |date, posts| posts.size }
   end
 
-  get '/' do
+  get /^\/(blog\/?)?$/ do
     @posts = Post.all(:order => [:created_at.desc])
     erb :home
   end
 
-  get /blog\/\d{4}\/\d{2}\/\d{2}\/([^\.]+)(\.\w+)?/ do
+  get /^\/blog\/\d{4}\/\d{2}\/\d{2}\/([^\.]+)(\.\w+)?/ do
     @post = Post.first(:slug => params[:captures].first) or raise Sinatra::NotFound
     @title = @post.title
+    @keywords = @post.tag_list.split(", ")
     erb :post
   end
 
-  get /\/(contact|about-me|projects)(\.\w+)?$/ do
+  get /^\/(contact|about-me|projects)(\.\w+)?$/ do
     page = params[:captures].first
     @title = { "contact" => "Contact", "about-me" => "About Me" }[page]
     @content = RedCloth.new(File.read(APP_ROOT + "/content/" + page + ".txt")).to_html
@@ -63,6 +64,7 @@ class BlogApp < Sinatra::Base
     tag = Tag.first(:name => params[:tag])
     if tag
       @title = "Posts tagged with '#{tag.name}':"
+      @keywords = [tag.name]
       @posts = tag.posts
       erb :posts
     else
@@ -81,6 +83,13 @@ class BlogApp < Sinatra::Base
       erb :posts
     end
   end
+
+  get '/atom/feed' do
+    @posts = Post.all(:order => [:created_at.desc], :limit => 10)
+    last_modified(@posts.first.created_at) rescue nil # Conditinal GET, send 304 if not modified
+    builder :atom
+  end
+
 end
 
 #BlogApp.run!(:port => 6100, :server => "thin", :environment => :production) if __FILE__ == $0
