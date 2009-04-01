@@ -1,0 +1,6 @@
+<h2><%= @title %></h2>
+<br/>
+
+<% @posts.each do |post| %>
+  <%= partial :"posts/post", :locals => { :post => post, :comments => false } %>
+<% end %>

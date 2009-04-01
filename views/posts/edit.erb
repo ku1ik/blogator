@@ -3,6 +3,6 @@
 <div class="admin">
   <form action="/posts/<%= @post.id %>" method="post">
     <input type="hidden" name="_method" value="put" />
-    <%= partial :post_form %>
+    <%= partial :"posts/post_form" %>
   </form>
 </div>

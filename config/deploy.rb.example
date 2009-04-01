@@ -1,8 +1,8 @@
 set :application, "blogator"
-set :repository, "git://github.com/sickill/blogator.git "
-set :user, "kill"
-set :domain, "#{user}@sickill.net"
-set :deploy_to, "/home/kill/#{application}"
+set :repository, "git://.../blogator.git"
+set :user, "username"
+set :domain, "#{user}@domain"
+set :deploy_to, "/path/to/#{application}"
 
 namespace :db do
   remote_task :autoupgrade, :roles => [:app] do

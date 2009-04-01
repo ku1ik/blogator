@@ -45,7 +45,7 @@ class BlogApp < Sinatra::Base
     @post = Post.first(:slug => params[:captures].first) or raise Sinatra::NotFound
     @title = @post.title
     @keywords = @post.tag_list.split(", ")
-    erb :post
+    erb :"posts/show"
   end
 
   get /^\/(blog\/?)?$/ do
@@ -59,7 +59,7 @@ class BlogApp < Sinatra::Base
       @title = "Posts tagged with '#{tag.name}':"
       @keywords = [tag.name]
       @posts = tag.posts
-      erb :posts
+      erb :"posts/list"
     else
       redirect "/"
     end
@@ -73,14 +73,14 @@ class BlogApp < Sinatra::Base
       @title << "/#{start_month.to_s.rjust(2, "0")}" if start_month == end_month
       @title << ":"
       @posts = Post.all(:created_at => (DateTime.new(year, start_month)..DateTime.new(year, end_month, -1)), :order => [:created_at.desc])
-      erb :posts
+      erb :"posts/list"
     end
   end
 
   get '/:static_page' do
     page = params[:static_page]
     begin
-      @content = RedCloth.new(File.read(APP_ROOT + "/content/" + page + ".txt")).to_html
+      @content = render_static_page(File.read(APP_ROOT + "/content/" + page + ".txt"))
       @title = { "contact" => "Contact", "about-me" => "About Me", "projects" => "My projects" }[page]
       erb :static
     rescue Errno::ENOENT
@@ -91,7 +91,7 @@ class BlogApp < Sinatra::Base
   get '/projects/:project' do
     project = params[:project]
     begin
-      @content = RedCloth.new(File.read(APP_ROOT + "/content/projects/" + project + ".txt")).to_html
+      @content = render_static_page(File.read(APP_ROOT + "/content/projects/" + project + ".txt"))
       @title = { "off" => "Open File Fast", "dece" => "DeCe", "rainbow" => "Rainbow" }[project]
       @keywords = [project]
       erb :static

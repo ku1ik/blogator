@@ -1,12 +1,9 @@
 h2. My projects
 
 <div class="projects">
-<div class="project">
-h3. "Open File Fast":/projects/off
 
-!(photo)http://farm4.static.flickr.com/3559/3403448549_c25119fac2_t.jpg! Off descirpion, sdfdsfdsfd. .dsf .fsd.fd .sdf.d.sd.sd.
+<%= partial :project, :locals => { :id => "off", :name => "Open File Fast", :desc => "Netbeans plugin for quick finding and opening files" } %>
 
-<a href="/projects/off">More</a>
+<%= partial :project, :locals => { :id => "rainbow", :name => "Rainbow gem", :desc => "Ruby gem extending String class to support ..." } %>
 
-</div>
 </div>

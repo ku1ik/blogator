@@ -1,5 +1,5 @@
 <div class="article">
-  <%= partial :article_header, :locals => { :post => post } %>
+  <%= partial "posts/post_header", :locals => { :post => post } %>
   <br class="clear" />
   <div class="article-content">
     <%= post.body %>
