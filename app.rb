@@ -41,11 +41,6 @@ class BlogApp < Sinatra::Base
     @archives = Post.all.to_a.group_by { |p| Date.new(p.created_at.year, p.created_at.month) }.map { |date, posts| posts.size }
   end
 
-  get /^\/(blog\/?)?$/ do
-    @posts = Post.all(:order => [:created_at.desc])
-    erb :home
-  end
-
   get /^\/blog\/\d{4}\/\d{2}\/\d{2}\/([^\.]+)(\.\w+)?/ do
     @post = Post.first(:slug => params[:captures].first) or raise Sinatra::NotFound
     @title = @post.title
@@ -53,11 +48,9 @@ class BlogApp < Sinatra::Base
     erb :post
   end
 
-  get /^\/(contact|about-me|projects)(\.\w+)?$/ do
-    page = params[:captures].first
-    @title = { "contact" => "Contact", "about-me" => "About Me" }[page]
-    @content = RedCloth.new(File.read(APP_ROOT + "/content/" + page + ".txt")).to_html
-    erb :static
+  get /^\/(blog\/?)?$/ do
+    @posts = Post.all(:order => [:created_at.desc])
+    erb :home
   end
 
   get '/blog/tag/:tag' do
@@ -84,12 +77,33 @@ class BlogApp < Sinatra::Base
     end
   end
 
+  get '/:static_page' do
+    page = params[:static_page]
+    begin
+      @content = RedCloth.new(File.read(APP_ROOT + "/content/" + page + ".txt")).to_html
+      @title = { "contact" => "Contact", "about-me" => "About Me", "projects" => "My projects" }[page]
+      erb :static
+    rescue Errno::ENOENT
+      pass
+    end
+  end
+
+  get '/projects/:project' do
+    project = params[:project]
+    begin
+      @content = RedCloth.new(File.read(APP_ROOT + "/content/projects/" + project + ".txt")).to_html
+      @title = { "off" => "Open File Fast", "dece" => "DeCe", "rainbow" => "Rainbow" }[project]
+      @keywords = [project]
+      erb :static
+    rescue Errno::ENOENT
+      pass
+    end
+  end
+
   get '/atom/feed' do
     @posts = Post.all(:order => [:created_at.desc], :limit => 10)
-    last_modified(@posts.first.created_at) rescue nil # Conditinal GET, send 304 if not modified
+    last_modified(@posts.first.try(:created_at)) # Conditinal GET, send 304 if not modified
     builder :atom
   end
 
 end
-
-#BlogApp.run!(:port => 6100, :server => "thin", :environment => :production) if __FILE__ == $0

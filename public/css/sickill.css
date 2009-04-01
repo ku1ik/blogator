@@ -40,6 +40,13 @@ font-style: italic;
   margin: 0 0 0.3em;
   font-family: 'Trebuchet MS', Calibri, Arial, Helvetica;
 }
+
+#content h3 {
+  font-size: 16px;
+  margin: 0 0 15px;
+  font-family: 'Trebuchet MS', Calibri, Arial, Helvetica;
+}
+
 #content .article {
   border-bottom:1px solid #CCCCCC;
   margin:0 0 30px;
@@ -324,4 +331,13 @@ span.tag_popularity {
   padding-left:12px;
   line-height:1.5em;
   background:transparent url(/images/f-li.gif) no-repeat scroll 0 0;
+}
+
+div.projects {
+  margin: 20px 0;
+}
+
+div.project {
+  float: left;
+  width: 200px;
 }

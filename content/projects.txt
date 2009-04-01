@@ -1,0 +1,12 @@
+h2. My projects
+
+<div class="projects">
+<div class="project">
+h3. "Open File Fast":/projects/off
+
+!(photo)http://farm4.static.flickr.com/3559/3403448549_c25119fac2_t.jpg! Off descirpion, sdfdsfdsfd. .dsf .fsd.fd .sdf.d.sd.sd.
+
+<a href="/projects/off">More</a>
+
+</div>
+</div>
