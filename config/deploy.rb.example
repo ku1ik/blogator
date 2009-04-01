@@ -1,0 +1,29 @@
+set :application, "blogator"
+set :repository, "git://github.com/sickill/blogator.git "
+set :user, "kill"
+set :domain, "#{user}@sickill.net"
+set :deploy_to, "/home/kill/#{application}"
+
+namespace :db do
+  remote_task :autoupgrade, :roles => [:app] do
+    # TODO
+  end
+end
+
+namespace :vlad do
+  remote_task :symlink_configs, :roles => [:app] do
+    # run "ln -s #{shared_path}/config/database.yml #{current_path}/config/database.yml"
+    # run "ln -s #{shared_path}/config/local_config.rb #{current_path}/config/local_config.rb"
+  end
+
+  remote_task :start, :roles => [:app] do
+    run "sudo god start #{application}"
+  end
+
+  remote_task :stop, :roles => [:app] do
+    run "sudo god stop #{application}"
+  end
+
+  task :deploy => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'vlad:start']
+  task :deploy_with_autoupgrade => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
+end
