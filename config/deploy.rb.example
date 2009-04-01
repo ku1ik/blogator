@@ -12,8 +12,7 @@ end
 
 namespace :vlad do
   remote_task :symlink_configs, :roles => [:app] do
-    # run "ln -s #{shared_path}/config/database.yml #{current_path}/config/database.yml"
-    # run "ln -s #{shared_path}/config/local_config.rb #{current_path}/config/local_config.rb"
+    run "ln -s #{shared_path}/system/db.sqlite3 #{current_path}/db.sqlite3"
   end
 
   remote_task :start, :roles => [:app] do
