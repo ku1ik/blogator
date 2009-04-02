@@ -4,7 +4,7 @@ body {
 }
 
 html, body, div, td {
-  font-family: Verdana,"Bitstream Vera Sans",sans-serif;
+  font-family: Verdana, "Bitstream Vera Sans", sans-serif;
   font-size: 12px;
 }
 
@@ -12,8 +12,13 @@ em {
   font-style: italic;
 }
 
+h2, h3 {
+  font-family: 'Trebuchet MS', Calibri, Verdana, "Bitstream Vera Sans", sans-serif;
+
+}
+
 p.section  {
-font-family:'Trebuchet MS',Calibri,Arial,Helvetica;
+  font-family: 'Trebuchet MS', Calibri, Verdana, "Bitstream Vera Sans", sans-serif;
 font-size:24px;
 padding-bottom:15px;
 padding-left:15px;
@@ -23,6 +28,7 @@ color: #777;
 /*text-align: center;*/
 font-style: italic;
 }
+
 #header h2 {
   font: normal 12px verdana, arial, sans-serif;
   margin: 2.35em 0.2em 0 0;
@@ -41,17 +47,17 @@ font-style: italic;
 
 #content h2 {
   font-size: 24px;
-  margin: 0 0 0.3em;
-  font-family: 'Trebuchet MS', Calibri, Arial, Helvetica;
+  margin: 0 0 20px;
 }
 
 #content h3 {
+  font-size: 17px;
   margin: 0 0 15px;
 }
 
-#content h3, .project a {
+.project a {
   font-size: 16px;
-  font-family: 'Trebuchet MS', Calibri, Arial, Helvetica;
+  font-family: 'Trebuchet MS', Calibri, "Bitstream Vera Sans", Verdana, Arial, Helvetica;
 }
 
 #content .article {
@@ -89,7 +95,7 @@ font-style: italic;
 
 #header a:link, #header a:visited {
   color:#DD0000;
-  font-family: 'Trebuchet MS',georgia,times,serif;
+  font-family: 'Trebuchet MS', Calibri, Georgia, times,serif;
   font-size:40px;
   text-decoration:none;
 }
@@ -101,7 +107,6 @@ h1 {
 
 #content .article-title a:link, #content .article-title a:visited {
   text-decoration:none;
-  font-size: 24px;
 }
 
 #content .article-preview .article-title a:link, #content .article-preview .article-title a:visited {

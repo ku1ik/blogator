@@ -1,10 +1,13 @@
 h2. Open File Fast
 
+h3. Introduction
+
 Textmate has nice feature which is a real timesaver. It's quick open file dialog. You can type only several characters of filename you are searching for and you get list of all files matching your pattern. When you are looking for FooBar.java you can type _fbj_ and you will find it. It really helps navigating through the project (especially bigger ones).
 
 So... let me introduce my new Netbeans plugin: *Open File Fast* (tm). It was inspired by mentioned Textmate's functionality but has a lot more features. Netbeans already has some Go-To-File dialog but it isn't too flexible and it requires you to type exact part of file's name.
 
-Here are the key features of Open File Fast:
+h3. Key features of Open File Fast
+
 * quick finding and opening any file from *main project*
 * two matching modes:
 ** _smart_ (like in Textmate, matching filenames must contain all typed characters, they can be separated by other characters)
@@ -20,6 +23,8 @@ Here are the key features of Open File Fast:
 ** file popularity (files opened frequently at the top of list)
 ** match accuracy (distance between characters from search phrase in matched filenames)
 * opening multiple files at once (selected with ctrl/shift + mouse)
+
+h3. Usage
 
 Let's see how it look in action. Invoke O-F-F from Netbeans' _Navigate_ menu (I recommend creating a keyboard shortcut for it in _Tools/Options/Keymap/Project_, I like ctrl+T). For example when you type _user_ end hit enter you will get following results:
 
@@ -41,12 +46,17 @@ Matching algorithm by default starts searching for pattern at the start of filen
 
 <p class="images"><%= image("http://farm4.static.flickr.com/3424/3310659061_ba12c6c208_m.jpg", "http://farm4.static.flickr.com/3424/3310659061_686ab1532b_o.png") %></p>
 
-Open File Fast can be set up to your own preferences and to match your own workflow. You can configure it under _Open File Fast_ tab in Netbeans' _Miscellaneous_ options:
+h3. Configuration
 
-<p class="images"><%= image("http://farm4.static.flickr.com/3567/3311489750_d487b3da51_m.jpg", "http://farm4.static.flickr.com/3567/3311489750_306e760e2e_o.png") %></p>
+Open File Fast can be set up to your own preferences and to match your own workflow. You can configure it under _Open File Fast_ tab in Netbeans' _Miscellaneous_ options.
+
+h3. Download
 
 Grab it here:
 "off-netbeans-0.9.2.nbm":http://counter.sickill.net/?f=http://sickill.net/assets/off-netbeans-0.9.2.nbm. If you want to help or just look into sources they're on "github":http://github.com/sickill/off-plugin/tree/master .
-This is the first public version of this plugin so it could have some bugs, however we've been using it for a while now with my workmates and nothing exploded yet :)
+
+h3. Support OFF!
+
+If you found Open File Fast usefull and want to help in its further development....
 
 <%= partial "projects/donate_off" %>
