@@ -4,8 +4,8 @@ h2. My projects
 
 <%= partial :project, :locals => { :id => "off", :name => "Open File Fast", :desc => "Plugin for Netbeans IDE 6.5+ allowing for quick finding and opening files in your project." } %>
 
-<%= partial :project, :locals => { :id => "rainbow", :name => "Rainbow gem", :desc => "Ruby gem extending String class to support ..." } %>
+<%# partial :project, :locals => { :id => "rainbow", :name => "Rainbow gem", :desc => "Ruby gem extending String class to support ..." } %>
 
-<%= partial :project, :locals => { :id => "dece", :name => "DeCe", :desc => "LAN messenger featuring public and private channels, file sending, desktop screenshots sharing and more..." } %>
+<%# partial :project, :locals => { :id => "dece", :name => "DeCe", :desc => "LAN messenger featuring public and private channels, file sending, desktop screenshots sharing and more..." } %>
 
 </div>
