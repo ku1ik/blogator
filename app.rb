@@ -1,16 +1,17 @@
 require File.join(File.dirname(__FILE__), 'init.rb')
-require 'sinatra'
+require 'sinatra/base'
 require 'sinatras-hat'
 
 class BlogApp < Sinatra::Base
-#  configure do
-    set :run, false
-    set :app_file, __FILE__
-    set :logging, true
-    set :static, true
-    set :root, APP_ROOT
-    set :dump_errors, true
-#  end
+  set :run, false
+  set :app_file, __FILE__
+  set :logging, true
+  set :static, true
+  set :root, APP_ROOT
+  set :dump_errors, true
+
+  configure do
+  end
 
   helpers do
     include Sickill::Helpers
@@ -39,6 +40,8 @@ class BlogApp < Sinatra::Base
   before do
     @tags = Tag.all(:posts_count.gte => 1, :order => [:name])
     @archives = Post.all.to_a.group_by { |p| Date.new(p.created_at.year, p.created_at.month) }.map { |date, posts| posts.size }
+    puts options.environment
+#    puts production?
   end
 
   get /^\/blog\/\d{4}\/\d{2}\/\d{2}\/([^\.]+)(\.\w+)?/ do
@@ -107,3 +110,5 @@ class BlogApp < Sinatra::Base
   end
 
 end
+
+BlogApp.run! if __FILE__ == $0
