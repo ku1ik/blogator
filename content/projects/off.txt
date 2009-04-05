@@ -2,9 +2,9 @@ h2. Open File Fast
 
 h3. Introduction
 
-Textmate has nice feature which is a real timesaver. It's quick open file dialog. You can type only several characters of filename you are searching for and you get list of all files matching your pattern. When you are looking for FooBar.java you can type _fbj_ and you will find it. It really helps navigating through the project (especially bigger ones).
+*Open File Fast* (tm) is a plugin for "Netbeans IDE":http://netbeans.org which allows you to find and open file in the project within a second.
 
-So... let me introduce my new Netbeans plugin: *Open File Fast* (tm). It was inspired by mentioned Textmate's functionality but has a lot more features. Netbeans already has some Go-To-File dialog but it isn't too flexible and it requires you to type exact part of file's name.
+It is inspired by "Textmate's":http://macromates.com/ quick open file dialog however it has a lot more features. Basically it works like this: you type only several characters of filename you are searching for and you get list of all files matching your pattern. For example when you are looking for FooBar.java you can type _fbj_ and you will find it. It really helps navigating through the project (especially bigger ones) as you don't need to use a mouse nor locate filename visually in project tree but just use filename shortcuts.
 
 h3. Key features of Open File Fast
 
@@ -26,25 +26,18 @@ h3. Key features of Open File Fast
 
 h3. Usage
 
-Let's see how it look in action. Invoke O-F-F from Netbeans' _Navigate_ menu (I recommend creating a keyboard shortcut for it in _Tools/Options/Keymap/Project_, I like ctrl+T). For example when you type _user_ end hit enter you will get following results:
+Open File Fast plugin installs itself in Netbeans' __Navigate__ menu as __Open File Fast__. I recommend creating a keyboard shortcut for it in _Tools/Options/Keymap/Project_.
 
-<p class="images"><%= image("http://farm4.static.flickr.com/3624/3310658511_ef5bc0f1ba_m.jpg", "http://farm4.static.flickr.com/3624/3310658511_714139020a_o.png") %></p>
+When invoked it opens search dialog. Type _some_ characters from filename you want to find. _Some_ as you may skip any characters you want. Use _*_ as a placeholder for any text. You can narrow down the search to files in specified directory by typing directory prefix followed by slash and then filename pattern (see example below).
 
-But what if you want to open <em>users_helper.rb</em> file? Just type _ush_ and you will find it!
+For example type:
+* _user_ when looking for _user.rb_ or _UberServer.java_
+* _ush_ when looking for <em>users_helper.rb</em>
+* _*.js_ when you want to list all javascript files (_*_ is not needed here if "Matching from start of filename" is turned off in preferences)
+* _a/m/_ when you want to list all files in _app/models_ directory
+* _a/v/s_ when you are looking for _show.html_ in _app/views_ directory
 
-<p class="images"><%= image("http://farm4.static.flickr.com/3339/3310658593_b6e7962299_m.jpg", "http://farm4.static.flickr.com/3339/3310658593_8c65b1f5bf_o.png") %></p>
-
-If you know that something you need is in some javascript file you can show all js files by entering _*.js_.
-
-<p class="images"><%= image("http://farm4.static.flickr.com/3581/3310658771_3cb70c5cb2_m.jpg", "http://farm4.static.flickr.com/3581/3310658771_ce4c88b990_o.png") %></p>
-
-When you want to narrow down your search to specific directory just type some parts of directories' names separated by slashes. For example when looking for files in directory _app/models_ (under project root) type _a/m/_.
-
-<p class="images"><%= image("http://farm4.static.flickr.com/3658/3311489548_a6449ce2d9_m.jpg", "http://farm4.static.flickr.com/3658/3311489548_de299abf9d_o.png") %><%= image("http://farm4.static.flickr.com/3350/3311489598_945ab8d6ba_m.jpg", "http://farm4.static.flickr.com/3350/3311489598_187ca4f7ff_o.png") %></p>
-
-Matching algorithm by default starts searching for pattern at the start of filename, but if you want to search for pattern anywhere in filename (like in Textmate) you can change it in options. Here we are searching for _proj_ and the results list contains also filenames not starting with _proj_.
-
-<p class="images"><%= image("http://farm4.static.flickr.com/3424/3310659061_ba12c6c208_m.jpg", "http://farm4.static.flickr.com/3424/3310659061_686ab1532b_o.png") %></p>
+For some screenshots look "here":http://sickill.net/blog/2009/02/26/open-file-fast-netbeans-plugin-for-quick-opening-project-files.html
 
 h3. Configuration
 
@@ -52,11 +45,10 @@ Open File Fast can be set up to your own preferences and to match your own workf
 
 h3. Download
 
-Grab it here:
-"off-netbeans-0.9.2.nbm":http://counter.sickill.net/?f=http://sickill.net/assets/off-netbeans-0.9.2.nbm. If you want to help or just look into sources they're on "github":http://github.com/sickill/off-plugin/tree/master .
+Grab it here: "off-netbeans-0.9.2.nbm":http://counter.sickill.net/?f=http://sickill.net/assets/off-netbeans-0.9.2.nbm. If you want to help or just look into sources they're on "github":http://github.com/sickill/off-plugin/tree/master .
 
 h3. Support OFF!
 
-If you found Open File Fast usefull and want to help in its further development....
+If you found Open File Fast usefull and want to help in its further development you can spare few bucks via PayPal.
 
 <%= partial "projects/donate_off" %>
