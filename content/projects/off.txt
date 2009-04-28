@@ -52,3 +52,5 @@ h3. Support OFF!
 If you found Open File Fast usefull and want to help in its further development you can spare few bucks via PayPal.
 
 <%= partial "projects/donate_off" %>
+
+Thanks to Aliaksandr Kaushovik for donating!
