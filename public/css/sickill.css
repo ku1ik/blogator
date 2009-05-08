@@ -379,3 +379,8 @@ div.project {
   margin-right:20px;
   width:310px;*/
 }
+
+pre, pre div {
+  font-family:'Bitstream Vera Sans Mono','Courier',monospace;
+  line-height:1.4em;
+}
