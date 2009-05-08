@@ -26,8 +26,8 @@ class BlogApp < Sinatra::Base
   end
 
   mount Post do
-    finder { |model, params| model.all(:order => [:created_at.desc]) }
-    record { |model, params| model.first(:id => params[:id]) }
+    finder { |model, params| model.all_records.all(:order => [:created_at.desc]) }
+    record { |model, params| model.all_records.first(:id => params[:id]) }
     protect :all, :username => "kill", :password => "karnuf", :realm => "BLOGZ"
     after :create do |on|
       on.success { |record| redirect(record.url) }
@@ -40,7 +40,7 @@ class BlogApp < Sinatra::Base
   before do
     @tags = Tag.all(:posts_count.gte => 1, :order => [:name])
     @archives = Post.all.to_a.group_by { |p| Date.new(p.created_at.year, p.created_at.month) }.map { |date, posts| posts.size }
-    puts options.environment
+#    puts options.environment
 #    puts production?
   end
 

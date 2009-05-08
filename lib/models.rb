@@ -7,11 +7,14 @@ class Post
   property :slug,        String, :length => 255, :nullable => false, :unique => true
   property :body,        Text, :nullable => false, :lazy => false
   property :body_source, Text, :nullable => false
+  property :draft,       Boolean, :nullable => false, :default => false
   property :created_at,  DateTime
   property :updated_at,  DateTime
 
   has n, :taggings
   has n, :tags, :through => :taggings
+
+  default_scope(:default).update(:draft => false)
 
   before :valid? do
     self.body = self.class.format(self.body_source, self.formatter)
@@ -22,8 +25,16 @@ class Post
     self.taggings.all.destroy!
   end
 
+  after :update do
+    self.tags.each { |t| t.recount_usage }
+  end
+
   before :create, :update_tags
   before :update, :update_tags
+
+  def self.all_records
+    all(:draft => [true, false])
+  end
 
   def self.format(src, formatter)
     src = ErbRenderer.new(src).render
@@ -33,6 +44,10 @@ class Post
     else
       src
     end
+  end
+
+  def draft=(value)
+    attribute_set(:draft, value.is_a?(Array) ? value.first : value)
   end
 
   def tag_list=(value)
