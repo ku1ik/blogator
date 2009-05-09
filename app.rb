@@ -26,33 +26,31 @@ class BlogApp < Sinatra::Base
   end
 
   mount Post do
-    finder { |model, params| model.all_records.all(:order => [:created_at.desc]) }
-    record { |model, params| model.all_records.first(:id => params[:id]) }
+    finder { |model, params| model.all(:order => [:created_at.desc]) }
+    record { |model, params| model.first(:id => params[:id]) }
     protect :all, :username => "kill", :password => "karnuf", :realm => "BLOGZ"
-    after :create do |on|
-      on.success { |record| redirect(record.url) }
-    end
-    after :update do |on|
-      on.success { |record| redirect(record.url) }
-    end
+#    after :create do |on|
+#      on.success { |record| redirect(record.url) }
+#    end
+#    after :update do |on|
+#      on.success { |record| redirect(record.url) }
+#    end
   end
 
   before do
     @tags = Tag.all(:posts_count.gte => 1, :order => [:name])
-    @archives = Post.all.to_a.group_by { |p| Date.new(p.created_at.year, p.created_at.month) }.map { |date, posts| posts.size }
-#    puts options.environment
-#    puts production?
+    @archives = Post.published.to_a.group_by { |p| Date.new(p.published_at.year, p.published_at.month) }.map { |date, posts| posts.size }
   end
 
   get /^\/blog\/\d{4}\/\d{2}\/\d{2}\/([^\.]+)(\.\w+)?/ do
-    @post = Post.first(:slug => params[:captures].first) or raise Sinatra::NotFound
+    @post = Post.published.first(:slug => params[:captures].first) or raise Sinatra::NotFound
     @title = @post.title
     @keywords = @post.tag_list.split(", ")
     erb :"posts/show"
   end
 
   get /^\/(blog\/?)?$/ do
-    @posts = Post.all(:order => [:created_at.desc])
+    @posts = Post.published
     erb :home
   end
 
@@ -75,7 +73,7 @@ class BlogApp < Sinatra::Base
       @title = "Archive for #{year}"
       @title << "/#{start_month.to_s.rjust(2, "0")}" if start_month == end_month
       @title << ":"
-      @posts = Post.all(:created_at => (DateTime.new(year, start_month)..DateTime.new(year, end_month, -1)), :order => [:created_at.desc])
+      @posts = Post.published.all(:published_at => (DateTime.new(year, start_month)..DateTime.new(year, end_month, -1)))
       erb :"posts/list"
     end
   end
@@ -104,8 +102,8 @@ class BlogApp < Sinatra::Base
   end
 
   get '/atom/feed' do
-    @posts = Post.all(:order => [:created_at.desc], :limit => 10)
-    last_modified(@posts.first.try(:created_at)) # Conditinal GET, send 304 if not modified
+    @posts = Post.published.all(:limit => 10)
+    last_modified(@posts.first.try(:published_at)) # Conditinal GET, send 304 if not modified
     builder :atom
   end
 

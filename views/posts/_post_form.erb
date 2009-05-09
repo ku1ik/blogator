@@ -17,11 +17,12 @@
     <label>Content:</label>
     <textarea name="post[body_source]" rows="32" cols="40"><%= @post.body_source %></textarea>
   </p>
+  <% unless @post.published_at %>
   <p>
     <label>&nbsp;</label>
-    <label class="checkbox"><input type="checkbox" name="post[draft]" value="1" <%= "checked" if @post.draft %>/> Draft</label>
-    <input type="hidden" value="0" name="post[draft]" />
+    <label class="checkbox"><input type="checkbox" name="post[published_at]" value="<%= DateTime.now %>" /> Publish</label>
   </p>
+  <% end %>
   <p class="indented">
     <input type="submit" value="Submit" class="button" /> or <a href="/posts">Cancel</a>
   </p>

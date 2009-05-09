@@ -1,20 +1,20 @@
 class Post
   include DataMapper::Resource
 
-  property :id,          Serial
-  property :title,       String, :length => 255, :nullable => false, :unique => true
-  property :formatter,   Enum[:none, :textile], :nullable => false, :default => :textile
-  property :slug,        String, :length => 255, :nullable => false, :unique => true
-  property :body,        Text, :nullable => false, :lazy => false
-  property :body_source, Text, :nullable => false
-  property :draft,       Boolean, :nullable => false, :default => false
-  property :created_at,  DateTime
-  property :updated_at,  DateTime
+  property :id,           Serial
+  property :title,        String, :length => 255, :nullable => false, :unique => true
+  property :formatter,    Enum[:none, :textile], :nullable => false, :default => :textile
+  property :slug,         String, :length => 255, :nullable => false, :unique => true
+  property :body,         Text, :nullable => false, :lazy => false
+  property :body_source,  Text, :nullable => false
+  property :published_at, DateTime
+  property :created_at,   DateTime
+  property :updated_at,   DateTime
 
   has n, :taggings
   has n, :tags, :through => :taggings
 
-  default_scope(:default).update(:draft => false)
+  default_scope(:default).update(:order => [:published_at.desc])
 
   before :valid? do
     self.body = self.class.format(self.body_source, self.formatter)
@@ -32,8 +32,8 @@ class Post
   before :create, :update_tags
   before :update, :update_tags
 
-  def self.all_records
-    all(:draft => [true, false])
+  def self.published
+    all(:published_at.not => nil)
   end
 
   def self.format(src, formatter)
@@ -59,12 +59,12 @@ class Post
   end
 
   def url
-    "/blog/#{self.created_at.strftime('%Y/%m/%d')}/#{self.slug}.html"
+    "/blog/#{self.published_at.strftime('%Y/%m/%d')}/#{self.slug}.html" if self.published_at
   end
 
   protected
   def update_tags
-    new_tags = @tag_list.split(", ")
+    new_tags = self.tag_list.split(", ")
     old_tags = self.tags.reload.map { |t| t.name }
     (old_tags - new_tags).each { |tag_name| self.taggings.first(:tag_id => Tag[tag_name].id).destroy }
     (new_tags - old_tags).each { |tag_name| self.taggings << Tagging.new(:tag => Tag[tag_name]) }
@@ -100,7 +100,7 @@ class Tag
   property :posts_count, Integer, :nullable => false, :default => 0
 
   has n, :taggings
-  has n, :posts, :through => :taggings, :order => [:created_at.desc], :unique => true
+  has n, :posts, :through => :taggings, :order => [:published_at.desc], :unique => true, :published_at.not => nil
 
   def self.[](name)
     first(:name => name) || Tag.create(:name => name)
@@ -113,7 +113,7 @@ class Tag
   end
 
   def recount_usage
-    self.posts_count = self.posts.all.size
+    self.posts_count = self.posts.size
     save
   end
 end

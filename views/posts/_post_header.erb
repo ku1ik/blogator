@@ -1,2 +1,9 @@
 <h2 class="article-title"><%= link_to post.title, post.url %></h2><!-- by <strong>Sickill</strong>  -->
-<div class="article-info">Posted on <%= post.created_at.strftime("%d %b %Y") %>, tagged with <%= post.tags.all(:order => [:name]).map { |t| link_to(t.name, "/blog/tag/#{t.name}") }.join(", ") %></div>
+<div class="article-info">
+  <% if post.published_at %>
+  Posted on <%= post.published_at.strftime("%d %b %Y") %>,
+  <% else %>
+  -DRAFT-, 
+  <% end %>
+  tagged with <%= post.tags.all(:order => [:name]).map { |t| link_to(t.name, "/blog/tag/#{t.name}") }.join(", ") %>
+</div>
