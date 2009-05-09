@@ -29,12 +29,6 @@ class BlogApp < Sinatra::Base
     finder { |model, params| model.all(:order => [:created_at.desc]) }
     record { |model, params| model.first(:id => params[:id]) }
     protect :all, :username => "kill", :password => "karnuf", :realm => "BLOGZ"
-#    after :create do |on|
-#      on.success { |record| redirect(record.url) }
-#    end
-#    after :update do |on|
-#      on.success { |record| redirect(record.url) }
-#    end
   end
 
   before do

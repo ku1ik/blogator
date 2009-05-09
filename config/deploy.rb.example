@@ -4,12 +4,6 @@ set :user, "username"
 set :domain, "#{user}@domain"
 set :deploy_to, "/path/to/#{application}"
 
-namespace :db do
-  remote_task :autoupgrade, :roles => [:app] do
-    # TODO
-  end
-end
-
 namespace :vlad do
   remote_task :symlink_configs, :roles => [:app] do
     run "ln -s #{shared_path}/system/db.sqlite3 #{current_path}/db.sqlite3"
@@ -24,6 +18,6 @@ namespace :vlad do
     run "sudo god stop #{application}"
   end
 
-  task :deploy => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'vlad:start']
-  task :deploy_with_autoupgrade => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
+  task :deploy => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
+  # task :deploy_with_autoupgrade => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
 end

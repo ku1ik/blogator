@@ -1,2 +1,2 @@
 #!/bin/sh
-irb -r init.rb
+irb -r console.rb
