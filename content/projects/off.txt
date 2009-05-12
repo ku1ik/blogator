@@ -53,4 +53,4 @@ If you found Open File Fast usefull and want to help in its further development 
 
 <%= partial "projects/donate_off" %>
 
-Thanks to Aliaksandr Kaushovik for donating!
+Thanks to Aliaksandr Kaushovik and Fabio Chelly for donating!
