@@ -8,7 +8,7 @@ It is inspired by "Textmate's":http://macromates.com/ quick open file dialog how
 
 h3. Key features of Open File Fast
 
-* quick finding and opening any file from *main project*
+* quick finding and opening any file from selected project
 * two matching modes:
 ** _smart_ (like in Textmate, matching filenames must contain all typed characters, they can be separated by other characters)
 ** _exact_ (like Netbeans' Go-To-File, matching filenames must contain exact phrase)
