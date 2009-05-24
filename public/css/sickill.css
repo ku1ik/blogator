@@ -384,3 +384,19 @@ pre, pre div {
   font-family:'Bitstream Vera Sans Mono','Courier',monospace;
   line-height:1.4em;
 }
+
+a.feed {
+  background-image: url(/images/icons/rss.png);
+}
+
+a.twitter {
+  background-image: url(/images/icons/twitter.png);
+}
+
+a.feed, a.twitter {
+  padding-left: 27px;
+  background-repeat:no-repeat;
+  display: block;
+  float: left;
+  line-height: 21px;
+}

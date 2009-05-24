@@ -1,8 +1,10 @@
 module Sickill
   module Helpers
 
-    def link_to(name, href)
-      %(<a href="#{href}">#{name}</a>)
+    def link_to(name, href, opts={})
+      attrs = ""
+      opts.each { |k,v| attrs << "#{k}=\"#{v}\" " } #.join(" ")
+      %(<a href="#{href}" #{attrs}>#{name}</a>)
     end
 
 #    def partial(name, options={})
@@ -26,7 +28,11 @@ module Sickill
     end
 
     def image(thumb, normal, desc="")
-      %(<a href="#{normal}" title="#{desc}"><img src="#{thumb}" alt="#{desc}" /></a>)
+      %(<a href="#{normal}" title="#{desc}">#{image_tag(thumb, desc)}</a>)
+    end
+
+    def image_tag(src, desc="")
+      %(<img src="#{src}" alt="#{desc}" />)
     end
 
     def rfc_date(datetime)
