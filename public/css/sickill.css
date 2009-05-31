@@ -300,13 +300,14 @@ div.clear {
 }
 
 code {
+  background-color:#DEDEDE;
+  padding:2px;
 }
 
 pre code {
   display: block;
-  padding: 10px;
-  background-color: #555;
-  color: white;
+  padding: 7px;
+  background-color: #DEDEDE;
 }
 
 .images img {
@@ -380,7 +381,7 @@ div.project {
   width:310px;*/
 }
 
-pre, pre div {
+pre, pre div, code {
   font-family:'Bitstream Vera Sans Mono','Courier',monospace;
   line-height:1.4em;
 }
