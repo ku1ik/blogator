@@ -2,8 +2,8 @@
 
 <%= link_to("New post", "/posts/new") %>
 
-<ul>
+<ol>
   <% @posts.each do |post| %>
     <li><%= post.title %> (<%= post.published_at ? post.published_at.strftime("%Y/%m/%d") : "---" %>) <%= link_to("Edit", "/posts/#{post.id}/edit") %></li>
   <% end %>
-</ul>
+</ol>
