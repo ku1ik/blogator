@@ -51,7 +51,7 @@ class Post
   end
 
   def tag_list=(value)
-    @tag_list = value.split(",").map { |t| t.strip }.reject { |t| t.empty? }.uniq.join(", ")
+    @tag_list = value.to_s.downcase.split(",").map { |t| t.strip }.reject { |t| t.empty? }.uniq.join(", ")
   end
 
   def tag_list
@@ -96,7 +96,7 @@ class Tag
   include DataMapper::Resource
 
   property :id,          Serial
-  property :name,        String, :length => 64, :nullable => false
+  property :name,        String, :length => 64, :nullable => false, :unique => true
   property :posts_count, Integer, :nullable => false, :default => 0
 
   has n, :taggings
