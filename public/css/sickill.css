@@ -43,6 +43,18 @@ font-style: italic;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   -o-border-radius: 4px;
+  margin-bottom: 30px;
+}
+
+#header .tabs li {
+  border-radius-topleft: 4px;
+  border-radius-topright: 4px;
+  -moz-border-radius-topleft: 4px;
+  -moz-border-radius-topright: 4px;
+  -webkit-border-radius-topleft: 4px;
+  -webkit-border-radius-topright: 4px;
+  -o-border-radius-topleft: 4px;
+  -o-border-radius-topright: 4px;
 }
 
 #content h2 {
@@ -83,9 +95,13 @@ font-style: italic;
   color: black;
   padding:15px 15px 50px;
   border-radius: 4px;
+  border-radius-topright: 0;
   -moz-border-radius: 4px;
+  -moz-border-radius-topright: 0;
   -webkit-border-radius: 4px;
+  -webkit-border-radius-topright: 0;
   -o-border-radius: 4px;
+  -o-border-radius-topright: 0;
 }
 
 #header {
@@ -226,7 +242,7 @@ a:hover, a:active { color: #ea7a22; text-decoration: none }
 
 #sidebar .content_box {
   background-color: white;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
   float: left;
   padding: 15px;
   border-radius: 4px;

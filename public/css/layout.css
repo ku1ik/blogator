@@ -25,6 +25,7 @@ body {
   height: 155px;
   padding: 0;
   position: relative;
+  width: 692px;
 }
 
 #header .logo {
@@ -34,8 +35,36 @@ body {
   bottom: 0;
 }
 
+#header .tabs {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#header #tabs ul li a {
+  font-family: 'Trebuchet MS', Calibri, Georgia, times, serif;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#header .tabs ul {
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+}
+
+#header .tabs ul li {
+  float: left;
+  background-color: white;
+  padding: 5px;
+  margin-left: 3px;
+}
+
 #page {
-  margin-top: 15px;
+  margin-top: 1px;
 }
 
 #content {

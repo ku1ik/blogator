@@ -22,6 +22,14 @@
       <a href="/">sickill.net</a><br/>
       Marcin Kulik's Home Page
     </div>
+    <div id="tabs" class="tabs">
+      <ul>
+        <li><%= link_to("Blog", "/") %></li>
+        <li><%= link_to("My projects", "/projects") %></li>
+        <li><%= link_to("About me", "/about-me") %></li>
+        <li><%= link_to("Contact", "/contact") %></li>
+      </ul>
+    </div>
   </div>
   <div id="page">
     <div id="content">
@@ -32,20 +40,6 @@
       <!-- <div class="content_box">
         <img src="/images/sickill-avatar-64.png" class="avatar" />
       </div> -->
-      <div class="content_box menu">
-        <p>
-          <%= link_to("Blog", "/") %>
-        </p>
-        <p>
-          <%= link_to("My projects", "/projects") %>
-        </p>
-        <p>
-          <%= link_to("About me", "/about-me") %>
-        </p>
-        <p>
-          <%= link_to("Contact", "/contact") %>
-        </p>
-      </div>
       <div class="content_box menu">
         <p>
           <%= link_to("RSS Feed", "http://feeds2.feedburner.com/SickillNet", :class => "feed") %>
