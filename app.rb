@@ -1,4 +1,5 @@
 require File.join(File.dirname(__FILE__), 'init.rb')
+require 'rack/cache'
 require 'sinatra/base'
 require 'sinatras-hat'
 
@@ -9,6 +10,8 @@ class BlogApp < Sinatra::Base
   set :static, true
   set :root, APP_ROOT
   set :dump_errors, true
+  
+  use Rack::Cache, :verbose => true
 
   configure do
   end
@@ -28,7 +31,7 @@ class BlogApp < Sinatra::Base
   mount Post do
     finder { |model, params| model.all(:order => [:created_at.desc]) }
     record { |model, params| model.first(:id => params[:id]) }
-    protect :all, :username => "kill", :password => "karnuf", :realm => "BLOGZ"
+    protect :all, :username => CONFIG_LOGIN, :password => CONFIG_PASSWORD, :realm => "BLOGZ"
   end
 
   before do
@@ -38,6 +41,7 @@ class BlogApp < Sinatra::Base
 
   get /^\/blog\/\d{4}\/\d{2}\/\d{2}\/([^\.]+)(\.\w+)?/ do
     @post = Post.published.first(:slug => params[:captures].first) or raise Sinatra::NotFound
+    cache(:modified_at => @post.updated_at)
     @title = @post.title
     @keywords = @post.tag_list.split(", ")
     erb :"posts/show"
@@ -45,15 +49,17 @@ class BlogApp < Sinatra::Base
 
   get /^\/(blog\/?)?$/ do
     @posts = Post.published
+    cache(:modified_at => @posts.map { |p| p.updated_at }.max)
     erb :home
   end
 
   get '/blog/tag/:tag' do
     tag = Tag.first(:name => params[:tag])
     if tag
+      @posts = tag.posts
+      cache(:modified_at => @posts.map { |p| p.updated_at }.max)
       @title = "Posts tagged with '#{tag.name}':"
       @keywords = [tag.name]
-      @posts = tag.posts
       erb :"posts/list"
     else
       redirect "/"
@@ -64,10 +70,11 @@ class BlogApp < Sinatra::Base
     get path do
       year = params[:year].to_i
       params[:month] ? (start_month = end_month = params[:month].to_i) : (start_month, end_month = 1, 12)
+      @posts = Post.published.all(:published_at => (DateTime.new(year, start_month)..DateTime.new(year, end_month, -1)))
+      cache(:modified_at => @posts.map { |p| p.updated_at }.max)
       @title = "Archive for #{year}"
       @title << "/#{start_month.to_s.rjust(2, "0")}" if start_month == end_month
       @title << ":"
-      @posts = Post.published.all(:published_at => (DateTime.new(year, start_month)..DateTime.new(year, end_month, -1)))
       erb :"posts/list"
     end
   end

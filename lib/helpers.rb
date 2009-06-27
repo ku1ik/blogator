@@ -42,5 +42,13 @@ module Sickill
     def render_static_page(data)
       RedCloth.new(ERB.new(data).result(binding)).to_html
     end
+    
+    def cache(opts={})
+      max_age = opts[:max_age] || 300
+      response["Cache-Control"] = "max-age=#{max_age}, public"
+      modified_at = opts[:modified_at]
+      last_modified modified_at if modified_at
+    end
+    
   end
 end

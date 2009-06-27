@@ -3,3 +3,5 @@ nbproject
 log
 config/deploy.rb
 .directory
+local_config.rb
+

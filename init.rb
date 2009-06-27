@@ -10,6 +10,7 @@ APP_ROOT = File.dirname(__FILE__)
 
 DataMapper.setup(:default, "sqlite3://#{File.expand_path(File.join(File.dirname(__FILE__), 'db.sqlite3'))}")
 
+require File.join(File.dirname(__FILE__), 'local_config.rb')
 require File.join(File.dirname(__FILE__), 'lib', 'extensions.rb')
 require File.join(File.dirname(__FILE__), 'lib', 'helpers.rb')
 require File.join(File.dirname(__FILE__), 'lib', 'renderers.rb')

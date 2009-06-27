@@ -1,0 +1,3 @@
+CONFIG_LOGIN = "joe"
+CONFIG_PASSWORD = "hacked"
+
