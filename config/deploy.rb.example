@@ -7,6 +7,7 @@ set :deploy_to, "/path/to/#{application}"
 namespace :vlad do
   remote_task :symlink_configs, :roles => [:app] do
     run "ln -s #{shared_path}/system/db.sqlite3 #{current_path}/db.sqlite3"
+    run "ln -s #{shared_path}/system/local_config.rb #{current_path}/local_config.rb"
     run "ln -s #{shared_path}/assets #{current_path}/public/assets"
   end
 
