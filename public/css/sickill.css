@@ -422,3 +422,7 @@ a.feed, a.twitter {
   float: left;
   line-height: 21px;
 }
+
+ul, ol {
+  padding-left: 20px;
+}
