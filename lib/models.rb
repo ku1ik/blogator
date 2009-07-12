@@ -18,7 +18,7 @@ class Post
 
   before :valid? do
     self.body = self.class.format(self.body_source, self.formatter)
-    self.slug = self.title.downcase.gsub(/[\s\.]+/, '-').gsub(/\-{2,}/, '-').gsub(/[^a-z0-9\-]/, '') if self.id.nil? && self.slug.nil?
+    self.slug = self.title.downcase.gsub(/[\s\.]+/, '-').gsub(/[^a-z0-9\-]/, '').gsub(/\-{2,}/, '-') if self.id.nil? && self.slug.nil?
   end
 
   before :destroy do
