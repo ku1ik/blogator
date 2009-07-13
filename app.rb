@@ -9,9 +9,8 @@ class BlogApp < Sinatra::Base
   set :static, true
   set :root, APP_ROOT
   set :dump_errors, true
-  
-  configure do
-  end
+
+  eval File.read(File.join(APP_ROOT, 'environments', ENV['RACK_ENV'] || 'development') + '.rb')
 
   helpers do
     include Sickill::Helpers
