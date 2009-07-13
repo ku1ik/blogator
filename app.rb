@@ -1,5 +1,4 @@
 require File.join(File.dirname(__FILE__), 'init.rb')
-require 'rack/cache'
 require 'sinatra/base'
 require 'sinatras-hat'
 
@@ -11,8 +10,6 @@ class BlogApp < Sinatra::Base
   set :root, APP_ROOT
   set :dump_errors, true
   
-  use Rack::Cache, :verbose => true
-
   configure do
   end
 
