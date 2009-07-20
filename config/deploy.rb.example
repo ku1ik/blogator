@@ -11,6 +11,6 @@ namespace :vlad do
     run "ln -s #{shared_path}/assets #{current_path}/public/assets"
   end
 
-  task :deploy => [ 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
-  # task :deploy_with_autoupgrade => [ 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
+  task :deploy => [ 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start_app']
+  # task :deploy_with_autoupgrade => [ 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start_app']
 end
