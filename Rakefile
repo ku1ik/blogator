@@ -1,6 +1,6 @@
 begin
   require "vlad"
-  Vlad.load(:app => nil, :web => nil, :scm => "git")
+  Vlad.load(:app => "passenger", :web => nil, :scm => "git")
 rescue LoadError
   # do nothing
 end

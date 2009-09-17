@@ -11,14 +11,6 @@ namespace :vlad do
     run "ln -s #{shared_path}/assets #{current_path}/public/assets"
   end
 
-  remote_task :start, :roles => [:app] do
-    run "sudo god start #{application}"
-  end
-
-  remote_task :stop, :roles => [:app] do
-    run "sudo god stop #{application}"
-  end
-
-  task :deploy => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
-  # task :deploy_with_autoupgrade => [ 'vlad:stop', 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start']
+  task :deploy => [ 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start_app']
+  # task :deploy_with_autoupgrade => [ 'vlad:update', 'vlad:symlink_configs', 'db:autoupgrade', 'vlad:start_app']
 end
